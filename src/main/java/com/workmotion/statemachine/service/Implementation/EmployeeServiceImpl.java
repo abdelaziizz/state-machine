@@ -34,6 +34,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee findById(int id) throws ChangeSetPersister.NotFoundException {
-        return employeeRepository.findById(id).orElseThrow(() -> new ChangeSetPersister.NotFoundException());
+        return employeeRepository.findById(id).orElseThrow(ChangeSetPersister.NotFoundException::new);
     }
 }
