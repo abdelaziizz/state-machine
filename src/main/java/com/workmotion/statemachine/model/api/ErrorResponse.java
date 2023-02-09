@@ -17,7 +17,7 @@ public class ErrorResponse {
     private String message;
     private String requestedURI;
 
-    public ErrorResponse (HttpStatus status, String requestedURI) {
+    public ErrorResponse(HttpStatus status, String requestedURI) {
         timeStamp = LocalDateTime.now();
         this.status = status;
         this.requestedURI = requestedURI;

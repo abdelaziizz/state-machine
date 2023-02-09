@@ -25,16 +25,15 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
-    public ResponseEntity<Object> handleIntegrityConstraintException(HttpServletRequest req,  SQLIntegrityConstraintViolationException ex) {
+    public ResponseEntity<Object> handleIntegrityConstraintException(HttpServletRequest req, SQLIntegrityConstraintViolationException ex) {
         ErrorResponse response = new ErrorResponse(HttpStatus.CONFLICT, req.getRequestURI());
         response.setMessage("The contract number provided already exists for another employee");
         return buildResponseEntity(response);
     }
 
-    private ResponseEntity<Object> buildResponseEntity (ErrorResponse response) {
+    private ResponseEntity<Object> buildResponseEntity(ErrorResponse response) {
         return new ResponseEntity<>(response, response.getStatus());
     }
-
 
 
 }

@@ -2,7 +2,7 @@ package com.workmotion.statemachine.controller;
 
 import com.workmotion.statemachine.model.dto.EmployeeDTO;
 import com.workmotion.statemachine.model.entity.Employee;
-import com.workmotion.statemachine.service.Framework.EmployeeService;
+import com.workmotion.statemachine.service.framework.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
@@ -23,9 +23,14 @@ public class EmployeeController {
         return new ResponseEntity<>(employeeService.create(employeeDTO), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Employee> findById(@PathVariable int id) throws ChangeSetPersister.NotFoundException {
-        return new ResponseEntity<>(employeeService.findById(id), HttpStatus.OK);
+    @GetMapping("/{employeeID}")
+    public ResponseEntity<Employee> findById(@PathVariable int employeeID) throws ChangeSetPersister.NotFoundException {
+        return new ResponseEntity<>(employeeService.findById(employeeID), HttpStatus.OK);
+    }
+
+    @PostMapping("/transition/{employeeID}")
+    public ResponseEntity<Employee> transition(@PathVariable int employeeID, @RequestParam String transition) throws ChangeSetPersister.NotFoundException {
+        return new ResponseEntity<>(employeeService.transition(employeeID, transition), HttpStatus.OK);
     }
 
 }
