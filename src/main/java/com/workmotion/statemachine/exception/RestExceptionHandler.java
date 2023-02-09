@@ -31,6 +31,20 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return buildResponseEntity(response);
     }
 
+    @ExceptionHandler(IllegalTransitionException.class)
+    public ResponseEntity<Object> handleIllegalTransitionException (HttpServletRequest req, IllegalTransitionException ex) {
+        ErrorResponse response = new ErrorResponse(HttpStatus.FORBIDDEN, req.getRequestURI());
+        response.setMessage("Illegal state transition");
+        return buildResponseEntity(response);
+    }
+
+    @ExceptionHandler(InvalidTransitionException.class)
+    public ResponseEntity<Object> handleInvalidTransitionException (HttpServletRequest req, InvalidTransitionException ex) {
+        ErrorResponse response = new ErrorResponse(HttpStatus.UNPROCESSABLE_ENTITY, req.getRequestURI());
+        response.setMessage("Unknown state transition");
+        return buildResponseEntity(response);
+    }
+
     private ResponseEntity<Object> buildResponseEntity(ErrorResponse response) {
         return new ResponseEntity<>(response, response.getStatus());
     }

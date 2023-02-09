@@ -1,5 +1,7 @@
 package com.workmotion.statemachine.utility;
 
+import com.workmotion.statemachine.exception.IllegalTransitionException;
+import com.workmotion.statemachine.exception.InvalidTransitionException;
 import com.workmotion.statemachine.model.entity.Employee;
 import com.workmotion.statemachine.model.stateEnums.*;
 import com.workmotion.statemachine.repository.EmployeeRepository;
@@ -28,17 +30,16 @@ public class TransitionHandler {
         try {
             StateTransition stateTransition = StateTransition.valueOf(transition.toUpperCase());
             return routeStateTransition(employee, stateTransition);
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             try {
                 SecuritySubStateTransition securitySubStateTransition = SecuritySubStateTransition.valueOf(transition.toUpperCase());
                 return routeSecuritySubStateTransition(employee, securitySubStateTransition);
-            } catch (Exception ex) {
+            } catch (IllegalArgumentException ex) {
                 try {
                     WorkPermitSubStateTransition workPermitSubStateTransition = WorkPermitSubStateTransition.valueOf(transition.toUpperCase());
                     return routeWorkPermitSubStateTransition(employee, workPermitSubStateTransition);
-                } catch (Exception exe) {
-                    return null;
-                    //throw invalid transition exception
+                } catch (IllegalArgumentException exe) {
+                    throw new InvalidTransitionException();
                 }
             }
         }
@@ -53,8 +54,7 @@ public class TransitionHandler {
             case ACTIVATE:
                 return stateTransitionHandler.activate(employee);
         }
-        // throw illegal transition exception
-        return null;
+        throw new IllegalTransitionException();
     }
 
     public Employee routeSecuritySubStateTransition(Employee employee, SecuritySubStateTransition transition) {
@@ -62,21 +62,19 @@ public class TransitionHandler {
             employee = securitySubStateTransitionHandler.finishSecurityCheck(employee);
             return checkAutomaticTransition(employee);
         }
-        // throw illegal transition exception
-        return null;
+        throw new IllegalTransitionException();
     }
 
     public Employee routeWorkPermitSubStateTransition(Employee employee, WorkPermitSubStateTransition transition) {
         switch (transition) {
             case AWAIT_WORK_PERMIT_VERIFICATION:
                 return workPermitSubStateTransitionHandler.awaitWorkPermitVerification(employee);
-            case FINISH_WORK_PERMIT_VERIFICATION:
+            case FINISH_WORK_PERMIT_CHECK:
                 employee = workPermitSubStateTransitionHandler.finishWorkPermitCheck(employee);
                 return checkAutomaticTransition(employee);
 
         }
-        // throw illegal transition exception
-        return null;
+        throw new InvalidTransitionException();
     }
 
 }

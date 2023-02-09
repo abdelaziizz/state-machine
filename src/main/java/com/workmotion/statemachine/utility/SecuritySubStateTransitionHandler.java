@@ -1,5 +1,6 @@
 package com.workmotion.statemachine.utility;
 
+import com.workmotion.statemachine.exception.IllegalTransitionException;
 import com.workmotion.statemachine.model.entity.Employee;
 import com.workmotion.statemachine.model.stateEnums.SecuritySubState;
 import com.workmotion.statemachine.repository.EmployeeRepository;
@@ -18,8 +19,7 @@ public class SecuritySubStateTransitionHandler {
             employeeRepository.save(employee);
             return employee;
         }
-        // throw illegal transition exception
-        return null;
+        throw new IllegalTransitionException();
     }
 
 }
