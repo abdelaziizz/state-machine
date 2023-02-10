@@ -23,7 +23,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleNotFoundException(HttpServletRequest req, ChangeSetPersister.NotFoundException ex) {
         ErrorResponse response = new ErrorResponse(HttpStatus.NOT_FOUND, req.getRequestURI());
         response.setMessage("Unable to locate this employee");
-        log.error(ex.getMessage());
+        ex.printStackTrace();
         return buildResponseEntity(response);
     }
 
@@ -31,7 +31,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleIntegrityConstraintException(HttpServletRequest req, SQLIntegrityConstraintViolationException ex) {
         ErrorResponse response = new ErrorResponse(HttpStatus.CONFLICT, req.getRequestURI());
         response.setMessage("The contract number provided already exists for another employee");
-        log.error(ex.getMessage());
+        ex.printStackTrace();
         return buildResponseEntity(response);
     }
 
@@ -39,7 +39,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleIllegalTransitionException(HttpServletRequest req, IllegalTransitionException ex) {
         ErrorResponse response = new ErrorResponse(HttpStatus.FORBIDDEN, req.getRequestURI());
         response.setMessage("Illegal state transition");
-        log.error(ex.getMessage());
+        ex.printStackTrace();
         return buildResponseEntity(response);
     }
 
@@ -47,7 +47,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleInvalidTransitionException(HttpServletRequest req, InvalidTransitionException ex) {
         ErrorResponse response = new ErrorResponse(HttpStatus.UNPROCESSABLE_ENTITY, req.getRequestURI());
         response.setMessage("Unknown state transition");
-        log.error(ex.getMessage());
+        ex.printStackTrace();
         return buildResponseEntity(response);
     }
 

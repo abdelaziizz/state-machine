@@ -26,17 +26,6 @@ public class StateTransitionHandler {
         throw new IllegalTransitionException();
     }
 
-    public Employee approve(Employee employee) {
-        if (employee.getState().equals(State.IN_CHECK) &&
-                employee.getSecuritySubState().equals(SecuritySubState.SECURITY_CHECK_FINISHED) &&
-                employee.getWorkPermitSubState().equals(WorkPermitSubState.WORK_PERMIT_CHECK_FINISHED)) {
-            employee.setState(State.APPROVED);
-            employeeRepository.save(employee);
-            return employee;
-        }
-        throw new IllegalTransitionException();
-    }
-
     public Employee activate(Employee employee) {
         if (employee.getState().equals(State.APPROVED)) {
             employee.setState(State.ACTIVE);

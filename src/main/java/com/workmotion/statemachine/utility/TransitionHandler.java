@@ -49,8 +49,6 @@ public class TransitionHandler {
         switch (transition) {
             case CHECK:
                 return stateTransitionHandler.check(employee);
-            case APPROVE:
-                return stateTransitionHandler.approve(employee);
             case ACTIVATE:
                 return stateTransitionHandler.activate(employee);
         }
@@ -67,7 +65,7 @@ public class TransitionHandler {
 
     public Employee routeWorkPermitSubStateTransition(Employee employee, WorkPermitSubStateTransition transition) {
         switch (transition) {
-            case AWAIT_WORK_PERMIT_VERIFICATION:
+            case COMPLETE_INITIAL_WORK_PERMIT_CHECK:
                 return workPermitSubStateTransitionHandler.awaitWorkPermitVerification(employee);
             case FINISH_WORK_PERMIT_CHECK:
                 employee = workPermitSubStateTransitionHandler.finishWorkPermitCheck(employee);
