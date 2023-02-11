@@ -18,7 +18,7 @@ Stack :
 - Open API
 
 There are three end-points defined,
-1) Create Employee
+1) Create Employee :
   this end-point consumes a JSON object of type employeeDTO with the following format : 
   {
     "name" : "test-name",
@@ -28,10 +28,10 @@ There are three end-points defined,
    }
    I did not define many attributes for the employee entity as per the task description. However, I defined a constraint on the contract number so that the user will not be able to define a new employee with an existing contract number and if that happens, the end point will throw an exception.
    
-2) Find Employee By ID
+2) Find Employee By ID : 
   this end-point takes the employee id as a path variable and returns the user if located and if not it throws a not found exception
   
-3) Transition (The most important end-point)
+3) Transition (The most important end-point) : 
   this end-point takes the employee id as a path variable and the transition the user would like to make as request parameter.
   The available transitions are : 
   - CHECK 
