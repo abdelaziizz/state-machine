@@ -4,15 +4,12 @@ import com.workmotion.statemachine.exception.IllegalTransitionException;
 import com.workmotion.statemachine.exception.InvalidTransitionException;
 import com.workmotion.statemachine.model.entity.Employee;
 import com.workmotion.statemachine.model.stateEnums.*;
-import com.workmotion.statemachine.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class TransitionHandler {
-
-    private final EmployeeRepository employeeRepository;
     private final StateTransitionHandler stateTransitionHandler;
     private final SecuritySubStateTransitionHandler securitySubStateTransitionHandler;
     private final WorkPermitSubStateTransitionHandler workPermitSubStateTransitionHandler;
@@ -21,7 +18,6 @@ public class TransitionHandler {
         if (employee.getWorkPermitSubState().equals(WorkPermitSubState.WORK_PERMIT_CHECK_FINISHED) &&
                 employee.getSecuritySubState().equals(SecuritySubState.SECURITY_CHECK_FINISHED)) {
             employee.setState(State.APPROVED);
-            employeeRepository.save(employee);
         }
         return employee;
     }

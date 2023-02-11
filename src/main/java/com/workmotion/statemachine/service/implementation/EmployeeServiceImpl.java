@@ -49,6 +49,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee transition(int id, String transition) throws ChangeSetPersister.NotFoundException {
         Employee employee = findById(id);
-        return transitionHandler.routeTransition(employee, transition);
+        employee = transitionHandler.routeTransition(employee, transition);
+        return employeeRepository.save(employee);
     }
 }
