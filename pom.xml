@@ -10,8 +10,7 @@
     </parent>
     <groupId>com.workmotion</groupId>
     <artifactId>state-machine</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>state-machine</name>
     <description>state-machine</description>
     <properties>
@@ -69,6 +68,7 @@
         </dependency>
     </dependencies>
     <build>
+        <finalName>state-machine</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
