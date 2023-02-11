@@ -9,7 +9,7 @@ You can run this project simply by cloning it and the routing using the terminal
 Testing :
 - Unit and Integration testing under "StateMachineApplicationTests.java"
 - Manual testing using Swagger at : "http://localhost:8080/state-machine/swagger-ui.html"
-- 
+
 Stack :
 - Java 11
 - Spring boot
