@@ -52,8 +52,7 @@ public class EmployeeController {
         return new ResponseEntity<>(employeeService.findById(employeeID), HttpStatus.OK);
     }
 
-    @Operation(summary = " Available state transitions : " + "CHECK,  " + "ACTIVATE,  "
-            + "COMPLETE_INITIAL_WORK_PERMIT_CHECK,  " + "FINISH_WORK_PERMIT_CHECK,  " + "FINISH_SECURITY_CHECK")
+    @Operation(summary = " Available state transitions : CHECK, ACTIVATE, COMPLETE_INITIAL_WORK_PERMIT_CHECK, FINISH_WORK_PERMIT_CHECK, FINISH_SECURITY_CHECK")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "State changed successfully",
                     content = {@Content(mediaType = "application/json",
