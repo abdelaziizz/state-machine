@@ -4,8 +4,6 @@ WORKDIR /state-machine
 
 COPY . .
 
-RUN mvn clean install verify
-
-CMD mvn test
+RUN mvn clean install
 
 CMD mvn spring-boot:run
